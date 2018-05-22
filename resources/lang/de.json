@@ -1,8 +1,19 @@
 {
   "Login": "Einloggen",
+  "Logout": "Ausloggen",
   "E-Mail address": "E-Mail Adresse",
+  "Username": "Benutzername",
   "Password": "Passwort",
   "Register": "Registrieren",
   "Remember me": "Angemeldet bleiben",
-  "Submit": "Abschicken"
+  "Submit": "Abschicken",
+  "Home": "Home",
+  "Login failed": "Login fehlgeschlagen",
+  "Login successful": "Login erfolgreich",
+  "Patients": "Patienten",
+  "Patient": "Patient",
+  "Name": "Name",
+  "Birthdate": "Geburtstag",
+  "Gender": "Geschlecht",
+  "Settings": "Einstellungen"
 }

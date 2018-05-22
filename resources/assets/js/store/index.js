@@ -2,17 +2,31 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+import user from './modules/user';
+import patient from './modules/patient';
+
 Vue.use(Vuex);
 
-const store = new Vuex.Store({
+export default new Vuex.Store({
     state: {
-        count: 0
+        alert: {}
     },
     mutations: {
-        increment (state) {
-            state.count++
+        setAlert (state, payload) {
+            state.alert = payload;
+        },
+
+        clearAlert(state) {
+            state.alert = {};
         }
+    },
+    getters: {
+        hasAlert (state) {
+            return state.alert.type != null;
+        }
+    },
+    modules: {
+        user,
+        patient
     }
 });
-
-export default store;

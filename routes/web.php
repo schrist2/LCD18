@@ -13,4 +13,4 @@
 
 Route::get('/{a?}', function () {
     return view('app');
-});
+})->where(['a' => '.*']);
