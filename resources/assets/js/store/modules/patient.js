@@ -5,18 +5,20 @@ const state = {
 };
 
 const getters = {
-
+    showProperties (state) {
+        return state.show ? state.show.data.properties : [];
+    }
 };
 
 const actions = {
-    fetchIndex (context, payload) {
-        Vue.axios.get('/patients'+(payload.page ? '?page='+payload.page : '')).then((response) => {
+    async fetchIndex (context, payload) {
+        await Vue.axios.get('/patients'+(payload.page ? '?page='+payload.page : '')).then((response) => {
             context.commit('setIndex', response.data);
         });
     },
 
-    fetchShow (context, payload) {
-        Vue.axios.get('/patients/'+payload).then((response) => {
+    async fetchShow (context, payload) {
+        await Vue.axios.get('/patients/'+payload).then((response) => {
             context.commit('setShow', response.data);
         });
     }

@@ -10,7 +10,8 @@ class Patient extends Model
     public function properties()
     {
         return $this->belongsToMany(Property::class)
-            ->withPivot(['value'])
-            ->withTimestamps();
+            ->withPivot(['value', 'time'])
+            ->withTimestamps()
+            ->orderBy('time');
     }
 }

@@ -16,7 +16,7 @@
                     <td>{{ patient.gender }}</td>
                 </tr>
             </table>
-            <pagination :data="$store.state.patient.index"></pagination>
+            <pagination :data="paginationData"></pagination>
         </div>
     </div>
 </template>
@@ -28,6 +28,11 @@
         name: 'index',
         components: {
             Pagination
+        },
+        computed: {
+            paginationData () {
+                return this.$store.state.patient.index != null ? this.$store.state.patient.index.meta : null;
+            }
         },
         methods: {
             fetchData () {

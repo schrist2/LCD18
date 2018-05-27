@@ -15,5 +15,8 @@
   "Name": "Name",
   "Birthdate": "Geburtstag",
   "Gender": "Geschlecht",
-  "Settings": "Einstellungen"
+  "Settings": "Einstellungen",
+  "Vitals": "Vitalwerte",
+  "Time": "Zeit",
+  "Value": "Wert"
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Patient;
+use App\Http\Resources\Patient as PatientResource;
 
 class PatientController extends Controller
 {
@@ -16,7 +17,7 @@ class PatientController extends Controller
      */
     public function index(Request $request)
     {
-        return Patient::paginate();
+        return PatientResource::collection(Patient::paginate());
     }
 
     /**
@@ -38,7 +39,7 @@ class PatientController extends Controller
      */
     public function show($id)
     {
-        return Patient::find($id);
+        return new PatientResource(Patient::find($id));
     }
 
     /**
