@@ -1,13 +1,5 @@
 <template>
-    <div class="card">
-        <h5 class="card-header">
-            {{ $t('Patient') }}
-        </h5>
-        <div class="card-body">
-            <h4>{{ $t('Vitals') }}</h4>
-            <canvas class="d-block" id="vitalsChart"></canvas>
-        </div>
-    </div>
+    <canvas class="d-block" id="vitalsChart"></canvas>
 </template>
 
 <script>
@@ -59,7 +51,11 @@
                         ]
                     },
                     options: {
-                        responsive: true,
+                        //responsive: true,
+                        title: {
+                            display: true,
+                            text: this.$t('Vitals')
+                        },
                         scales: {
                             xAxes: [{
                                 type: 'time',

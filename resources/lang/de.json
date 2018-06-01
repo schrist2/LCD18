@@ -18,5 +18,10 @@
   "Settings": "Einstellungen",
   "Vitals": "Vitalwerte",
   "Time": "Zeit",
-  "Value": "Wert"
+  "Value": "Wert",
+  "Male": "Männlich",
+  "Female": "Weiblich",
+  "N/A": "k.A.",
+  "All": "Alle",
+  "Rows per page": "Zeilen pro Seite"
 }

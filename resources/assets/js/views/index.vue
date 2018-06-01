@@ -1,6 +1,6 @@
 <template>
     <div>
-        Index...
+
     </div>
 </template>
 
@@ -13,7 +13,6 @@
             } else {
                 this.$router.push({ name: 'auth.login' });
             }
-
         }
     }
 </script>

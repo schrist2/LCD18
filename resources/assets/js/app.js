@@ -12,6 +12,10 @@ import './auth';
 // Components
 import app from './components/app';
 
+import Vuetify from 'vuetify';
+
+Vue.use(Vuetify);
+
 //
 Vue.component(app.name, app);
 

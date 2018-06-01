@@ -1,29 +1,28 @@
 <template>
-    <div class="card">
-        <h5 class="card-header">
-            {{ $t('Login') }}
-        </h5>
-        <div class="card-body">
-            <form v-on:submit.prevent="login">
-                <div class="form-group">
-                    <label for="username" class="bmd-label-floating">{{ $t('Username') }}</label>
-                    <input v-model="username" type="text" class="form-control" id="username" required>
-                </div>
-                <div class="form-group">
-                    <label for="password" class="bmd-label-floating">{{ $t('Password') }}</label>
-                    <input v-model="password" type="password" class="form-control" id="password" required>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input v-model="rememberMe" type="checkbox"> {{ $t('Remember me') }}
-                    </label>
-                </div>
-                <button v-bind:disabled="loading" type="submit" class="btn btn-primary btn-raised">
-                    <span v-if="loading"><i class="fa fa-spinner fa-spin"></i></span>
-                    <span v-else>{{ $t('Submit') }}</span>
-                </button>
-            </form>
-        </div>
+    <div>
+        <v-container>
+            <v-layout align-center justify-center>
+                <v-flex xs12 sm8 md4>
+                    <v-card class="elevation-12">
+                        <v-toolbar dark color="primary">
+                            <v-toolbar-title>{{ $t('Login') }}</v-toolbar-title>
+                        </v-toolbar>
+                        <v-card-text>
+                            <v-form @submit.prevent="login" id="loginForm">
+                                <v-text-field v-model="username" :label="$t('Username')" required></v-text-field>
+                                <v-text-field v-model="password" :label="$t('Password')" type="password" required></v-text-field>
+                                <v-checkbox v-model="rememberMe" :label="$t('Remember me')"></v-checkbox>
+                            </v-form>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-btn :loading="loading" color="primary" form="loginForm" type="submit">
+                                {{ $t('Submit') }}
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-flex>
+            </v-layout>
+        </v-container>
     </div>
 </template>
 
@@ -57,7 +56,7 @@
                         this.loading = false;
 
                         this.$store.commit('setAlert', {
-                            type: 'danger',
+                            type: 'error',
                             message: this.$t('Login failed')
                         })
                     },

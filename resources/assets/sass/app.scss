@@ -3,7 +3,10 @@
 @import "variables";
 
 // Bootstrap
-@import '~bootstrap-material-design/scss/bootstrap-material-design';
+//@import '~bootstrap-material-design/scss/bootstrap-material-design';
+
+@import '~vuetify/dist/vuetify.min.css';
+@import url('//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons');
 
 // Font Awesome
 @import '~font-awesome/scss/font-awesome';
