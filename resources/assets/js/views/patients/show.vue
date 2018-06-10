@@ -1,5 +1,20 @@
 <template>
-    <canvas class="d-block" id="vitalsChart"></canvas>
+    <div style="margin: -16px;">
+        <v-toolbar color="primary lighten-1" dark flat>
+            <v-toolbar-title>
+                {{ patient.first_name }} {{ patient.last_name }}<br>
+            </v-toolbar-title>
+        </v-toolbar>
+
+        <v-tabs v-model="activeTab">
+            <v-tab :key="0">
+                {{ $t('Vitals' ) }}
+            </v-tab>
+            <v-tab-item :key="0">
+                <canvas class="d-block" id="vitalsChart"></canvas>
+            </v-tab-item>
+        </v-tabs>
+    </div>
 </template>
 
 <script>
@@ -7,16 +22,21 @@
 
     export default {
         name: 'show',
+        data () {
+            return {
+                activeTab: 0
+            }
+        },
         computed: {
             ...mapGetters({
-                patientProperties: 'patient/showProperties'
+                patient: 'patients/current'
             })
         },
         methods: {
             getChartData (propertyName, color) {
                 let data = [];
-                for (let key in this.patientProperties) {
-                    let patientProperty = this.patientProperties[key];
+                for (let key in this.patient.properties) {
+                    let patientProperty = this.patient.properties[key];
 
                     if (patientProperty.name !== propertyName) {
                         continue;
@@ -33,6 +53,7 @@
                     fill: false,
                     backgroundColor: color,
                     borderColor: color,
+                    borderWidth: 1,
                     xValueType: 'dateTime',
                     data
                 };
@@ -51,11 +72,6 @@
                         ]
                     },
                     options: {
-                        //responsive: true,
-                        title: {
-                            display: true,
-                            text: this.$t('Vitals')
-                        },
                         scales: {
                             xAxes: [{
                                 type: 'time',
@@ -80,7 +96,7 @@
             }
         },
         mounted () {
-            this.$store.dispatch('patient/fetchShow', this.$route.params.id).then(() => {
+            this.$store.dispatch('patients/fetchCurrent', this.$route.params.id).then(() => {
                 this.createVitalsChart();
             });
         }

@@ -5,28 +5,36 @@
                 :items="items"
                 :loading="loading"
                 :no-data-text="''"
-                :rows-per-page-items="[5, 10, 25, { text: $t('All'), value:-1 }]"
-                :rows-per-page-text="$t('Rows per page')"
+                :no-results-text="''"
                 class="elevation-1"
+                hide-actions
         >
             <template slot="items" slot-scope="props">
                 <td><router-link :to="{ name: 'patient.show', params: { id: props.item.id } }">{{ props.item.name }}</router-link></td>
                 <td>{{ props.item.birthdate }}</td>
                 <td>{{ props.item.gender }}</td>
             </template>
+
+            <v-pagination v-model="paginationPage" :length="patientList.meta.last_page" slot="footer"></v-pagination>
         </v-data-table>
     </div>
 </template>
 
 <script>
+    import { mapGetters } from 'vuex';
+
     export default {
         name: 'index',
         data () {
             return {
-                loading: false
+                loading: false,
+                paginationPage: this.$route.query.page ? parseInt(this.$route.query.page) : 1
             };
         },
         computed: {
+            ...mapGetters({
+                patientList: 'patients/list'
+            }),
             headers () {
                 return [
                     { text: this.$t('Name'), value: 'name', sortable: true, align: 'left' },
@@ -36,11 +44,7 @@
             },
 
             items () {
-                if (this.$store.state.patient.index == null) {
-                    return [];
-                }
-
-                return this.$store.state.patient.index.data.map(x => {
+                return this.patientList.items.map(x => {
                     let genderNames = {
                         ['m']: this.$t('Male'),
                         ['f']: this.$t('Female'),
@@ -55,23 +59,23 @@
                     };
                 })
             },
-
-            paginationData () {
-                return this.$store.state.patient.index != null ? this.$store.state.patient.index.meta : null;
-            }
         },
         methods: {
             fetchData () {
                 this.loading = true;
 
-                this.$store.dispatch('patient/fetchIndex', { page: this.$route.query.page }).then(() => {
+                this.$store.dispatch('patients/fetchList', { page: this.$route.query.page }).then(() => {
                     this.loading = false;
                 });
             }
         },
         watch: {
-            '$route' (to, from) {
+            '$route.query.page' (to, from) {
                 this.fetchData();
+            },
+
+            'paginationPage' (to, from) {
+                this.$router.push({ name: 'patient.index', query: { page: to } });
             }
         },
         mounted () {
