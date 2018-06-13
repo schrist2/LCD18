@@ -16,7 +16,7 @@
             <v-toolbar :clipped-left="$vuetify.breakpoint.lgAndUp" color="primary" dark fixed app>
                 <v-toolbar-title>
                     <v-toolbar-side-icon v-if="$auth.check()" @click="drawer = !drawer"></v-toolbar-side-icon>
-                    <span class="hidden-sm-and-down">medicAR</span>
+                    <span>medicAR</span>
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-toolbar-items>
@@ -86,7 +86,7 @@
         },
         data () {
             return {
-                drawer: true
+                drawer: this.$vuetify.breakpoint.lgAndUp
             }
         }
     }
